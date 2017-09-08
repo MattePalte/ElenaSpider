@@ -33,7 +33,7 @@ sites = [('https://www.studio-orta.com', 'https://www.studio-orta.com/en/'),
 #site_root = 'http://www.deutsches-museum.de'
 #first_page = 'http://www.deutsches-museum.de/en/'
 
-deepness = 6
+deepness = 2
 visited_list = []
 to_visit = []
 english_pages = []
@@ -70,6 +70,12 @@ def count_on_this_page(driver, page, f):
         print("(" + word + "): " + str(result), end='\t', file=f)
         dict[word] = dict[word] + result
     print("", file=f)
+
+def claearDict():
+    global words
+    global dict
+    for word in words:
+        dict[word] = 0
 
 def find_between( s, start, first, last ):
     try:
@@ -204,6 +210,7 @@ def spider(site_root, first_page, f):
         count_on_this_page(driver, p, f)
     print(dict, file=f)
     driver.quit()
+    claearDict()
 
 
 def main():
@@ -212,7 +219,7 @@ def main():
     global to_visit
     global english_pages
 
-    for site in sites[2:]:
+    for site in sites:
 
         visited_list = []
         to_visit = []
